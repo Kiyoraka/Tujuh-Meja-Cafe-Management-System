@@ -255,7 +255,7 @@ p { margin: 0 0 1em; }
 .queue-number { font-family: var(--font-display); font-size: 5rem; line-height: 1; color: var(--primary); margin: 8px 0; }
 .queue-meter { height: 10px; border-radius: var(--radius-pill); background: var(--surface-warm); overflow: hidden; margin: 18px 0 8px; }
 .queue-meter span { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width .6s ease; }
-.ready-banner { padding: 22px; border-radius: var(--radius-md); background: var(--free); color: var(--surface); }
+.ready-banner { padding: 22px; border-radius: var(--radius-md); background: #3F6B43; color: var(--surface); }  /* deeper sage: AA for white text */
 .ready-banner h2 { color: var(--surface); margin-bottom: .2em; }
 
 @media (prefers-reduced-motion: reduce) {
