@@ -9,3 +9,6 @@ Project Resources
 
 # Claude Code settings
 .claude/
+
+# Editor settings
+.vscode/
