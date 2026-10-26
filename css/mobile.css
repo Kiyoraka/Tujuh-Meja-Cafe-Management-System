@@ -1,7 +1,31 @@
-/* Tujuh Meja Cafe - phone overrides. Filled in Phase 6. */
+/* Tujuh Meja Cafe - tablet and phone overrides. */
+
+@media (max-width: 900px) {
+  .hero .container { grid-template-columns: 1fr; gap: 32px; }
+  .hero-figure { order: -1; }
+  .form-wrap { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 720px) {
   .site-footer .container { grid-template-columns: 1fr; }
   .site-nav { gap: 14px; }
   .site-nav a { font-size: .85rem; }
+  .site-nav a:first-child { display: none; }
+
+  .hero { padding-block: 24px 16px; }
+  .hero-badge { width: 72px; height: 72px; left: auto; right: 12px; bottom: -16px; }
+  .hero-badge b { font-size: 1.8rem; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .live-strip { grid-template-columns: 1fr; gap: 8px; }
+  .live-pill { display: flex; align-items: baseline; gap: 10px; }
+  .live-pill b { font-size: 1.15rem; }
+
+  .steps { grid-template-columns: 1fr; }
+  .qr-card { grid-template-columns: 1fr; }
+  .qr-card img.photo { min-height: 180px; max-height: 220px; }
+
+  .banner { height: 170px; }
+  .form-wrap { margin-top: -24px; }
+  .field-row { grid-template-columns: 1fr; }
+  .mini-table { min-width: calc(25% - 8px); flex: 1 1 calc(25% - 8px); }
 }

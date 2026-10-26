@@ -1,18 +1,10 @@
-// Boot: register routes, then start the router.
+// Boot: register routes, re-render on every state change, then start the router.
 
-import { addRoute, startRouter } from './router.js';
-import { html } from './ui.js';
-import { publicPage } from './views/layout.js';
+import { addRoute, startRouter, refresh } from './router.js';
+import { subscribe } from './state.js';
+import { landing } from './views/landing.js';
 
-// Temporary landing until the customer pages land (Phase 3).
-const comingSoon = {
-  render: () => publicPage(html`
-    <section class="container page">
-      <p class="eyebrow">Opening soon</p>
-      <h1>Seven tables.<br>One good seat waiting.</h1>
-    </section>`),
-};
+addRoute('/', landing);
 
-addRoute('/', comingSoon);
-
+subscribe(() => refresh());
 startRouter(document.getElementById('app'));

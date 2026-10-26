@@ -39,6 +39,11 @@ export function currentPath() {
   return (location.hash.replace(/^#/, '') || '/').split('?')[0];
 }
 
+export function queryParam(name) {
+  const query = location.hash.split('?')[1] || '';
+  return new URLSearchParams(query).get(name);
+}
+
 export function navigate(path) {
   if (currentPath() === path) render();
   else location.hash = path;
