@@ -27,7 +27,6 @@
 .admin-greeting { margin: 0; font-size: .85rem; color: var(--muted); }
 .admin-topbar-side { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .admin-clock { font-size: .85rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-.topbar-icon { display: none; }
 .admin-content { padding: 28px 32px 48px; display: grid; gap: 20px; align-content: start; }
 .admin-tabbar { display: none; }
 
@@ -144,6 +143,23 @@
 .modal { position: relative; width: min(460px, 100%); background: var(--surface); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--raised); display: grid; gap: 16px; }
 .modal h2 { margin: 0; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* ---------- More sheet (admin, phones) ---------- */
+.sheet-backdrop { position: fixed; inset: 0; z-index: 35; /* under the tab bar, so More toggles it */ display: grid; align-items: end; background: rgba(28, 36, 39, .4); }
+.sheet {
+  position: relative; display: grid; gap: 2px; padding: 10px 12px calc(84px + env(safe-area-inset-bottom));
+  background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--raised);
+  animation: sheet-up .18s ease-out;
+}
+@keyframes sheet-up { from { transform: translateY(24px); opacity: 0; } }
+.sheet-grip { justify-self: center; width: 40px; height: 4px; margin: 2px 0 10px; border-radius: 4px; background: var(--border); }
+.sheet a, .sheet button {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 12px; min-height: 52px;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--ink); font: inherit; font-weight: 500; text-align: left; cursor: pointer;
+}
+.sheet a:hover, .sheet button:hover { background: var(--surface-warm); text-decoration: none; }
+.sheet button[data-action="signout"] { color: var(--danger); }
+.sheet-meta { margin-left: auto; color: var(--muted); font-size: .85rem; }
 
 /* ---------- sign-in dialog (customer | staff) ---------- */
 .modal.signin-dialog { width: min(440px, 100%); padding: 0; gap: 0; overflow: hidden; }

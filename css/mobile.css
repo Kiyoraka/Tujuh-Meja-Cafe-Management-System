@@ -15,6 +15,8 @@
     background: var(--surface); border-top: 1px solid var(--border); padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
   }
 
+  .toast { bottom: calc(80px + env(safe-area-inset-bottom)); max-width: calc(100% - 32px); }
+
   /* admin: sidebar gives way to a bottom tab bar */
   .admin { grid-template-columns: 1fr; padding-bottom: 72px; }
   .admin-sidebar { display: none; }
@@ -22,21 +24,18 @@
   .admin-topbar h1 { font-size: 1.45rem; }
   .admin-topbar-side { width: 100%; gap: 8px; }
   .admin-clock { margin-right: auto; }
-  .topbar-icon {
-    display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0;
-    border: 1px solid var(--border); border-radius: 50%; background: var(--surface); color: var(--ink); cursor: pointer;
-  }
   .admin-content { padding: 16px 16px 32px; }
   .admin-tabbar {
     position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-template-columns: repeat(5, 1fr);
     background: var(--surface); border-top: 1px solid var(--border); padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
   }
-  .admin-tabbar a {
+  .admin-tabbar a, .admin-tabbar button {
     position: relative; display: grid; justify-items: center; gap: 2px; padding: 6px 2px;
+    border: 0; background: none; cursor: pointer; font: inherit;
     color: var(--muted); font-size: .7rem; font-weight: 500; border-radius: var(--radius-sm);
   }
   .admin-tabbar a:hover { text-decoration: none; }
-  .admin-tabbar a.active { color: var(--primary); background: color-mix(in srgb, var(--primary) 9%, var(--surface)); }
+  .admin-tabbar a.active, .admin-tabbar button.active { color: var(--primary); background: color-mix(in srgb, var(--primary) 9%, var(--surface)); }
   .admin-tabbar .nav-count { position: absolute; top: 0; right: 14%; margin: 0; min-width: 18px; padding: 0 5px; font-size: .65rem; }
   .grid-2 { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: repeat(2, 1fr); }

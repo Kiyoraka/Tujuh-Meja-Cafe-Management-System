@@ -4,7 +4,7 @@
 import { html, raw, formatDate, formatTime, toast } from '../../ui.js';
 import { currentUser, logout, requireAdmin } from '../../auth.js';
 import { STATE } from '../../state.js';
-import { currentPath, navigate } from '../../router.js';
+import { currentPath, navigate, refresh } from '../../router.js';
 import { icon } from '../icons.js';
 
 const NAV = [
@@ -15,6 +15,38 @@ const NAV = [
   { path: '/admin/tables', label: 'Tables', short: 'Tables', icon: 'tables' },
   { path: '/admin/settings', label: 'Settings', short: 'Settings', icon: 'settings' },
 ];
+
+// Phone tab bar: the first four pages, then More for the rest.
+const TAB_PATHS = ['/admin', '/admin/floor', '/admin/bookings', '/admin/waitlist'];
+const MORE_PATHS = ['/admin/tables', '/admin/settings'];
+let moreOpen = false;
+
+function moreSheet() {
+  if (!moreOpen) return '';
+  return html`
+    <div class="sheet-backdrop">
+      <button type="button" class="modal-scrim" data-action="close-more" aria-label="Close"></button>
+      <div class="sheet" role="dialog" aria-modal="true" aria-label="More">
+        <span class="sheet-grip" aria-hidden="true"></span>
+        <a href="#/admin/tables">${icon('tables')}<span>Tables</span><span class="sheet-meta">${STATE.tables.length}</span></a>
+        <a href="#/admin/settings">${icon('settings')}<span>Settings</span></a>
+        <a href="#/">${icon('cafe')}<span>View the cafe</span></a>
+        <button type="button" data-action="signout">${icon('signout')}<span>Sign out</span></button>
+      </div>
+    </div>`;
+}
+
+function closeMore() {
+  if (!moreOpen) return;
+  moreOpen = false;
+  refresh({ force: true });
+}
+
+// Any route change or Escape closes the sheet.
+window.addEventListener('hashchange', () => { moreOpen = false; });
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeMore();
+});
 
 function greeting(now) {
   const h = now.getHours();
@@ -61,17 +93,19 @@ export function adminPage({ title, subtitle = '', actions = '', content }) {
           <div class="admin-topbar-side">
             ${actions}
             <span class="admin-clock">${formatDate(now)} · ${formatTime(now)}</span>
-            <a class="topbar-icon" href="#/admin/settings" aria-label="Settings">${icon('settings')}</a>
-            <button type="button" class="topbar-icon" data-action="signout" aria-label="Sign out">${icon('signout')}</button>
           </div>
         </header>
         <main class="admin-content">${content}</main>
       </div>
 
       <nav class="admin-tabbar" aria-label="Admin">
-        ${NAV.slice(0, 5).map((item) => html`
+        ${NAV.filter((item) => TAB_PATHS.includes(item.path)).map((item) => html`
           <a href="#${item.path}" class="${path === item.path ? 'active' : ''}">${icon(item.icon)}<span>${item.short}</span>${badge(item.path)}</a>`)}
+        <button type="button" class="${MORE_PATHS.includes(path) || moreOpen ? 'active' : ''}" data-action="more" aria-expanded="${moreOpen}">
+          ${icon('more')}<span>More</span>
+        </button>
       </nav>
+      ${moreSheet()}
     </div>`;
 }
 
@@ -82,7 +116,13 @@ export function defineAdmin(view) {
     guard: requireAdmin,
     actions: {
       ...view.actions,
+      more() {
+        moreOpen = !moreOpen;
+        refresh({ force: true });
+      },
+      'close-more'() { closeMore(); },
       signout() {
+        moreOpen = false;
         logout();
         toast('Signed out.');
         navigate('/');
