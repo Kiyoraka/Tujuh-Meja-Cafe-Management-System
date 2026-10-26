@@ -131,7 +131,8 @@ export function cancelBooking(id) {
 
 // ---------- walk-in queue ----------
 
-export function joinQueue({ name, party, phone }) {
+// asVisitor: the person using this browser joined (their status page follows it).
+export function joinQueue({ name, party, phone }, { asVisitor = true } = {}) {
   const entry = {
     no: STATE.nextQueueNo++,
     name: name.trim(),
@@ -141,7 +142,7 @@ export function joinQueue({ name, party, phone }) {
     notifiedAt: null,
   };
   STATE.queue.push(entry);
-  STATE.myQueueNo = entry.no;
+  if (asVisitor) STATE.myQueueNo = entry.no;
   notify();
   return ok({ entry });
 }

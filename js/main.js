@@ -2,6 +2,7 @@
 
 import { addRoute, startRouter, refresh } from './router.js';
 import { subscribe } from './state.js';
+import { startSim } from './sim.js';
 import { landing } from './views/landing.js';
 import { bookPage, bookDone } from './views/book.js';
 import { queuePage, queueStatusPage } from './views/queue.js';
@@ -28,3 +29,4 @@ addRoute('/admin/settings', settingsPage);
 
 subscribe(() => refresh());
 startRouter(document.getElementById('app'));
+startSim();
