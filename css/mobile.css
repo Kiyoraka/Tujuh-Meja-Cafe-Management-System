@@ -1,0 +1,7 @@
+/* Tujuh Meja Cafe - phone overrides. Filled in Phase 6. */
+
+@media (max-width: 720px) {
+  .site-footer .container { grid-template-columns: 1fr; }
+  .site-nav { gap: 14px; }
+  .site-nav a { font-size: .85rem; }
+}
