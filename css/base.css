@@ -64,7 +64,7 @@ h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
 h3 { font-size: 1.15rem; }
 p { margin: 0 0 1em; }
 :focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--radius-sm); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr-only { position: absolute; left: 0; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 
 /* ---------- layout ---------- */
 .container { width: min(var(--container), 100% - 32px); margin-inline: auto; }

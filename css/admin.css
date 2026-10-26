@@ -104,13 +104,14 @@
 .chart-col::after {
   content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
   white-space: nowrap; padding: 6px 10px; border-radius: 8px; background: var(--ink); color: var(--bg);
-  font-size: .78rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .12s; z-index: 5;
+  font-size: .78rem; font-weight: 500; pointer-events: none; z-index: 5;
+  display: none; /* out of layout until shown, so it never widens the page */
 }
-.chart-col:hover::after, .chart-col:focus-visible::after { opacity: 1; }
+.chart-col:hover::after, .chart-col:focus-visible::after { display: block; }
 .chart-col:first-child::after { left: 0; transform: none; }
 .chart-col:last-child::after { left: auto; right: 0; transform: none; }
 .chart-axis { display: flex; gap: 2px; padding-left: 28px; margin-top: 6px; }
-.chart-axis span { flex: 1; text-align: center; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+.chart-axis span { flex: 1; min-width: 0; overflow: visible; text-align: center; font-size: .72rem; color: var(--muted); white-space: nowrap; }
 .chart figcaption { margin-top: 10px; }
 .legend { display: flex; gap: 14px; font-size: .8rem; color: var(--ink-soft); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }

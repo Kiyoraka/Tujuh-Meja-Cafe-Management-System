@@ -50,6 +50,9 @@
 
 @media (max-width: 560px) {
   .chart-axis.dense span:nth-child(even) { visibility: hidden; }
+  .chart-plot, .chart-axis { padding-left: 22px; }
+  .chart-grid { left: 22px; }
+  .chart-grid em { left: -24px; }
   .chart-axis span { font-size: .66rem; }
   .kpi b { font-size: 1.6rem; }
   .floor-row { gap: 8px; }

@@ -47,10 +47,12 @@ function barChart({ rows, label, valueOf, tipOf, classOf, axisOf, caption, dense
       </div>
       <div class="chart-axis ${dense ? 'dense' : ''}" aria-hidden="true">${rows.map((r) => html`<span>${axisOf(r)}</span>`)}</div>
       ${caption}
-      <table class="sr-only">
-        <caption>${label}</caption>
-        <tbody>${rows.map((r) => html`<tr><th scope="row">${axisOf(r)}</th><td>${tipOf(r)}</td></tr>`)}</tbody>
-      </table>
+      <div class="sr-only">
+        <table>
+          <caption>${label}</caption>
+          <tbody>${rows.map((r) => html`<tr><th scope="row">${axisOf(r)}</th><td>${tipOf(r)}</td></tr>`)}</tbody>
+        </table>
+      </div>
     </figure>`;
 }
 
