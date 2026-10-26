@@ -11,6 +11,7 @@ import { floorPage } from './views/admin/floor.js';
 import { bookingsPage } from './views/admin/bookings.js';
 import { waitlistPage } from './views/admin/waitlist.js';
 import { tablesPage } from './views/admin/tables.js';
+import { settingsPage } from './views/admin/settings.js';
 
 addRoute('/', landing);
 addRoute('/book', bookPage);
@@ -23,6 +24,7 @@ addRoute('/admin/floor', floorPage);
 addRoute('/admin/bookings', bookingsPage);
 addRoute('/admin/waitlist', waitlistPage);
 addRoute('/admin/tables', tablesPage);
+addRoute('/admin/settings', settingsPage);
 
 subscribe(() => refresh());
 startRouter(document.getElementById('app'));

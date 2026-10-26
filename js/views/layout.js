@@ -1,7 +1,15 @@
 // Shared public header and footer for the customer pages.
 
-import { html } from '../ui.js';
+import { html, formatTime } from '../ui.js';
 import { currentPath } from '../router.js';
+import { STATE } from '../state.js';
+
+function clock(hhmm) {
+  const [h, m] = hhmm.split(':').map(Number);
+  const d = new Date();
+  d.setHours(h, m, 0, 0);
+  return formatTime(d);
+}
 
 const NAV = [
   { href: '#/', label: 'Home' },
@@ -32,7 +40,7 @@ export function publicFooter() {
         </div>
         <div>
           <h4>Hours</h4>
-          <p>Every day, 10:00 AM – 10:00 PM</p>
+          <p>Every day, ${clock(STATE.settings.openTime)} – ${clock(STATE.settings.closeTime)}</p>
         </div>
         <div>
           <h4>Find us</h4>
