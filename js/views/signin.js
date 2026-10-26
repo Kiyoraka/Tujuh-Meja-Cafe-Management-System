@@ -132,7 +132,10 @@ export const loginRoute = {
   },
 };
 
-// Leaving #/login by any route closes the dialog; coming back opens it again.
+// Any route change closes the dialog (links, back button, typed URLs); #/login
+// reopens it on its own render. Registered before the router's listener, so the
+// next page renders without it.
 window.addEventListener('hashchange', () => {
+  dialog.open = false;
   if (currentPath() !== '/login') openedForHash = null;
 });
