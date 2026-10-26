@@ -100,6 +100,18 @@ p { margin: 0 0 1em; }
 .header-cta:hover { background: var(--accent); color: var(--ink); text-decoration: none; }
 .header-cta .icon { width: 18px; height: 18px; }
 .site-header .site-nav { margin-left: auto; }
+.site-tabbar { display: none; }
+.site-tabbar a, .site-tabbar button {
+  position: relative; display: grid; justify-items: center; gap: 2px; padding: 6px 2px;
+  border: 0; background: none; cursor: pointer; font: inherit;
+  color: var(--muted); font-size: .7rem; font-weight: 500; border-radius: var(--radius-sm);
+}
+.site-tabbar a:hover { text-decoration: none; }
+.site-tabbar a.active { color: var(--primary); background: color-mix(in srgb, var(--primary) 9%, var(--surface)); }
+.site-tabbar .nav-count {
+  position: absolute; top: 0; right: 8%; min-width: 18px; padding: 0 5px; border-radius: var(--radius-pill);
+  background: var(--accent); color: var(--ink); font-size: .62rem; font-weight: 700;
+}
 .link-btn { padding: 0; border: 0; background: none; color: var(--primary); font: inherit; font-weight: 500; cursor: pointer; }
 .link-btn:hover { text-decoration: underline; }
 .owner-line { margin: 16px 0 0; font-size: .92rem; color: var(--ink-soft); }

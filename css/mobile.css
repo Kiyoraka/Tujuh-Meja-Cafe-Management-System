@@ -5,6 +5,16 @@
   .hero-figure { order: -1; }
   .form-wrap { grid-template-columns: 1fr; }
 
+  /* guest pages: top links give way to a bottom tab bar */
+  .site-header .site-nav { display: none; }
+  .site-header .container { min-height: 56px; }
+  .wordmark { white-space: nowrap; }
+  .public { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  .site-tabbar {
+    position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-template-columns: repeat(5, 1fr);
+    background: var(--surface); border-top: 1px solid var(--border); padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  }
+
   /* admin: sidebar gives way to a bottom tab bar */
   .admin { grid-template-columns: 1fr; padding-bottom: 72px; }
   .admin-sidebar { display: none; }
@@ -47,6 +57,11 @@
 }
 
 @media (max-width: 560px) {
+  /* dialogs rise from the bottom like a sheet */
+  .modal-backdrop { place-items: end center; padding: 0; }
+  .modal { width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .modal.signin-dialog { width: 100%; padding-bottom: env(safe-area-inset-bottom); }
+
   .chart-axis.dense span:nth-child(even) { visibility: hidden; }
   .chart-plot, .chart-axis { padding-left: 22px; }
   .chart-grid { left: 22px; }

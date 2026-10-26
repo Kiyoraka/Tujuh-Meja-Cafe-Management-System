@@ -69,6 +69,35 @@ export function publicFooter() {
     </footer>`;
 }
 
+// Phone bottom nav: Home, Book, Queue, My place, and Sign in / Me / Dashboard.
+const TABS = [
+  { href: '#/', label: 'Home', icon: 'home', paths: ['/'] },
+  { href: '#/book', label: 'Book', icon: 'book', paths: ['/book', '/book/done'] },
+  { href: '#/queue', label: 'Queue', icon: 'waitlist', paths: ['/queue'] },
+  { href: '#/queue/me', label: 'My place', icon: 'clock', paths: ['/queue/me'] },
+];
+
+export function publicTabbar() {
+  const path = currentPath();
+  const queued = STATE.myQueueNo !== null && STATE.queue.some((q) => q.no === STATE.myQueueNo);
+  const link = accountLink();
+  const tab = (t) => html`
+    <a href="${t.href}" class="${t.paths.includes(path) ? 'active' : ''}" ${t.paths.includes(path) ? html`aria-current="page"` : ''}>
+      ${icon(t.icon)}<span>${t.label}</span>
+      ${t.href === '#/queue/me' && queued ? html`<span class="nav-count">#${STATE.myQueueNo}</span>` : ''}
+    </a>`;
+  return html`
+    <nav class="site-tabbar" aria-label="Main">
+      ${TABS.map(tab)}
+      ${link
+        ? html`<a href="${link.href}" class="${path === link.href.slice(1) ? 'active' : ''}">${icon(link.icon)}<span>${link.label}</span></a>`
+        : html`<button type="button" data-action="signin-open" data-tab="customer">${icon('signin')}<span>Sign in</span></button>`}
+    </nav>`;
+}
+
 export function publicPage(content) {
-  return html`${publicHeader()}<main>${content}</main>${publicFooter()}${signInDialog()}`;
+  return html`
+    <div class="public">
+      ${publicHeader()}<main>${content}</main>${publicFooter()}${publicTabbar()}${signInDialog()}
+    </div>`;
 }
