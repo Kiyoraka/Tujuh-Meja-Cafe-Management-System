@@ -4,7 +4,7 @@ A table reservation and walk-in waitlist system for a small cafe with seven tabl
 
 **Live demo:** https://kiyoraka.github.io/Tujuh-Meja-Cafe-Management-System/
 
-**Staff sign-in:** any email and any password work (or press *Fill demo login*).
+**Sign in:** one dialog with two tabs. **Customer** shows your bookings and queue place, and **Staff** opens the owner's dashboard. Any email and any password work on both (or press *Fill demo login*).
 
 > This is a demo. Every guest, phone number and address is fictional, nothing is charged and no text is really sent. Bookings, the queue and the tables live only in your browser tab, so a refresh starts a fresh day.
 
@@ -17,6 +17,8 @@ A table reservation and walk-in waitlist system for a small cafe with seven tabl
 - Deposit against no-shows, returned at seating
 - One-tap seating that moves the queue forward
 - Add, edit and arrange your own tables by zone
+- Guests sign in to see, and cancel, their own bookings
+- Bottom navigation on phones for guests and for the owner
 
 ## Pages
 
@@ -26,8 +28,8 @@ A table reservation and walk-in waitlist system for a small cafe with seven tabl
 | `#/book` book a table | `#/admin/floor` floor view |
 | `#/queue` join the walk-in queue | `#/admin/bookings` reservations |
 | `#/queue/me` your place in line | `#/admin/waitlist` waitlist |
-| | `#/admin/tables` add and edit tables |
-| | `#/admin/settings` hours, slots, deposit |
+| `#/account` my visits (customer sign-in) | `#/admin/tables` add and edit tables |
+| `#/login` sign-in dialog (`?as=customer` for the Customer tab) | `#/admin/settings` hours, slots, deposit |
 
 ## Built with
 
