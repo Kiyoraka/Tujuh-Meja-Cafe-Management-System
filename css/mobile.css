@@ -4,6 +4,8 @@
   .hero .container { grid-template-columns: 1fr; gap: 32px; }
   .hero-figure { order: -1; }
   .form-wrap { grid-template-columns: 1fr; }
+  .login-card { grid-template-columns: 1fr; }
+  .login-photo { min-height: 200px; }
 }
 
 @media (max-width: 720px) {

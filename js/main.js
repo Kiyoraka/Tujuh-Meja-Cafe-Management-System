@@ -5,12 +5,14 @@ import { subscribe } from './state.js';
 import { landing } from './views/landing.js';
 import { bookPage, bookDone } from './views/book.js';
 import { queuePage, queueStatusPage } from './views/queue.js';
+import { loginPage } from './views/login.js';
 
 addRoute('/', landing);
 addRoute('/book', bookPage);
 addRoute('/book/done', bookDone);
 addRoute('/queue', queuePage);
 addRoute('/queue/me', queueStatusPage);
+addRoute('/login', loginPage);
 
 subscribe(() => refresh());
 startRouter(document.getElementById('app'));
