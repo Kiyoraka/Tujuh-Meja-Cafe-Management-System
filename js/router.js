@@ -11,6 +11,8 @@
 import { html } from './ui.js';
 
 const routes = [];
+// Handlers that work on every page (e.g. the sign-in dialog); a page's own wins.
+const global = { actions: {}, submits: {}, inputs: {} };
 let current = null;
 let root = null;
 
@@ -37,6 +39,12 @@ function match(path) {
 
 export function currentPath() {
   return (location.hash.replace(/^#/, '') || '/').split('?')[0];
+}
+
+export function addGlobalHandlers({ actions = {}, submits = {}, inputs = {} }) {
+  Object.assign(global.actions, actions);
+  Object.assign(global.submits, submits);
+  Object.assign(global.inputs, inputs);
 }
 
 export function queryParam(name) {
@@ -75,7 +83,7 @@ function render() {
 function isBusy() {
   const active = document.activeElement;
   const typing = active && root.contains(active) && active.matches('input, textarea, select');
-  return typing || root.querySelector('.modal-backdrop') !== null;
+  return typing || root.querySelector('.modal-backdrop, .sheet-backdrop') !== null;
 }
 
 // Re-render the current page after a state change.
@@ -91,7 +99,8 @@ export function startRouter(mountEl) {
   root.addEventListener('click', (event) => {
     const el = event.target.closest('[data-action]');
     if (!el || !root.contains(el)) return;
-    const handler = current?.view.actions?.[el.dataset.action];
+    const name = el.dataset.action;
+    const handler = current?.view.actions?.[name] || global.actions[name];
     if (handler) { event.preventDefault(); handler(el, event); }
   });
 
@@ -99,13 +108,15 @@ export function startRouter(mountEl) {
     const form = event.target.closest('form[data-submit]');
     if (!form) return;
     event.preventDefault();
-    current?.view.submits?.[form.dataset.submit]?.(form, event);
+    const name = form.dataset.submit;
+    (current?.view.submits?.[name] || global.submits[name])?.(form, event);
   });
 
   const onInput = (event) => {
     const el = event.target.closest('[data-input]');
     if (!el) return;
-    current?.view.inputs?.[el.dataset.input]?.(el, event);
+    const name = el.dataset.input;
+    (current?.view.inputs?.[name] || global.inputs[name])?.(el, event);
   };
   root.addEventListener('input', onInput);
   root.addEventListener('change', onInput);
