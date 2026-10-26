@@ -33,12 +33,16 @@
   .grid-2 { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
   .kpis .kpi.accent { grid-column: 1 / -1; }
+  .floor-wrap { grid-template-columns: 1fr; }
+  .floor-side { position: static; }
 }
 
 @media (max-width: 560px) {
   .chart-axis.dense span:nth-child(even) { visibility: hidden; }
   .chart-axis span { font-size: .66rem; }
   .kpi b { font-size: 1.6rem; }
+  .floor-row { gap: 8px; }
+  .floor-table, .floor-table.wide { width: calc(50% - 4px); }
 }
 
 @media (max-width: 720px) {

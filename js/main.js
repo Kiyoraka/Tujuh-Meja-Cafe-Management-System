@@ -7,6 +7,7 @@ import { bookPage, bookDone } from './views/book.js';
 import { queuePage, queueStatusPage } from './views/queue.js';
 import { loginPage } from './views/login.js';
 import { dashboardPage } from './views/admin/dashboard.js';
+import { floorPage } from './views/admin/floor.js';
 
 addRoute('/', landing);
 addRoute('/book', bookPage);
@@ -15,6 +16,7 @@ addRoute('/queue', queuePage);
 addRoute('/queue/me', queueStatusPage);
 addRoute('/login', loginPage);
 addRoute('/admin', dashboardPage);
+addRoute('/admin/floor', floorPage);
 
 subscribe(() => refresh());
 startRouter(document.getElementById('app'));
