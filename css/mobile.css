@@ -35,6 +35,17 @@
   .kpis .kpi.accent { grid-column: 1 / -1; }
   .floor-wrap { grid-template-columns: 1fr; }
   .floor-side { position: static; }
+
+  /* data tables become cards */
+  .cards-on-phone thead { display: none; }
+  .cards-on-phone, .cards-on-phone tbody, .cards-on-phone tr, .cards-on-phone td { display: block; width: 100%; }
+  .cards-on-phone tr { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .cards-on-phone tr:last-child { border-bottom: 0; }
+  .cards-on-phone td { padding: 3px 0; border: 0; }
+  .cards-on-phone td[data-label] { display: flex; gap: 12px; }
+  .cards-on-phone td[data-label]::before { content: attr(data-label); flex: 0 0 72px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 2px; }
+  .cards-on-phone td.actions { justify-content: flex-start; padding-top: 8px; }
+  .cards-on-phone td.actions:empty { display: none; }
 }
 
 @media (max-width: 560px) {

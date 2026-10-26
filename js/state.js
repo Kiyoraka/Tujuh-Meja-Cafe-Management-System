@@ -95,6 +95,7 @@ function releaseReserved(booking) {
     .map(tableById)
     .filter((t) => t && t.status === 'reserved' && t.bookingId === booking.id)
     .forEach((t) => setTable(t, 'free'));
+  booking.tableIds = [];
 }
 
 export function seatBooking(id) {
