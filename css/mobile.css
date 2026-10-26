@@ -56,6 +56,11 @@
 }
 
 @media (max-width: 560px) {
+  /* my visits: date and action on top, details below */
+  .visit { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .visit-what { grid-column: 1 / -1; grid-row: 2; }
+  .visit-when { grid-template-columns: auto auto; gap: 8px; align-items: baseline; justify-content: start; }
+
   /* dialogs rise from the bottom like a sheet */
   .modal-backdrop { place-items: end center; padding: 0; }
   .modal { width: 100%; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
