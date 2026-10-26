@@ -32,6 +32,13 @@
   .admin-tabbar .nav-count { position: absolute; top: 0; right: 14%; margin: 0; min-width: 18px; padding: 0 5px; font-size: .65rem; }
   .grid-2 { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
+  .kpis .kpi.accent { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .chart-axis.dense span:nth-child(even) { visibility: hidden; }
+  .chart-axis span { font-size: .66rem; }
+  .kpi b { font-size: 1.6rem; }
 }
 
 @media (max-width: 720px) {

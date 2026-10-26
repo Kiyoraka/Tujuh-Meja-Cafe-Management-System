@@ -72,6 +72,42 @@
 .list-row .grow { flex: 1; min-width: 0; }
 .list-row .num { font-family: var(--font-display); font-weight: 700; color: var(--primary); min-width: 42px; }
 
+.kpi-unit { font-size: 1rem; font-family: var(--font-body); color: var(--muted); display: inline; }
+.kpi.accent .kpi-unit { color: rgba(251, 245, 234, .8); }
+
+/* ---------- charts (validated: #00909A + #B97A12 on #FFFDF8, all checks pass) ---------- */
+:root { --chart-1: #00909A; --chart-today: #B97A12; --chart-grid: #ECE3D3; }
+.chart { margin: 0; }
+.chart-plot { position: relative; height: 190px; padding-left: 28px; }
+.chart-grid { position: absolute; inset: 0 0 0 28px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+.chart-grid span { position: relative; border-top: 1px solid var(--chart-grid); height: 0; }
+.chart-grid em { position: absolute; left: -28px; top: -8px; width: 22px; text-align: right; font-style: normal; font-size: .7rem; color: var(--muted); }
+.chart-bars { position: relative; height: 100%; display: flex; align-items: flex-end; gap: 2px; }
+.chart-col { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; outline: none; }
+.chart-col:hover, .chart-col:focus-visible { background: color-mix(in srgb, var(--chart-1) 7%, transparent); border-radius: 6px 6px 0 0; }
+.chart-bar { position: relative; width: min(70%, 34px); min-height: 2px; background: var(--chart-1); border-radius: 4px 4px 0 0; }
+.chart-bar.today { background: var(--chart-today); }
+.chart-bar.forecast {
+  background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--chart-1) 35%, transparent) 0 3px, transparent 3px 7px);
+  box-shadow: inset 0 0 0 1.5px var(--chart-1);
+}
+.chart-value { position: absolute; left: 50%; bottom: calc(100% + 4px); transform: translateX(-50%); font-size: .75rem; font-weight: 700; color: var(--ink); }
+.chart-col::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  white-space: nowrap; padding: 6px 10px; border-radius: 8px; background: var(--ink); color: var(--bg);
+  font-size: .78rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .12s; z-index: 5;
+}
+.chart-col:hover::after, .chart-col:focus-visible::after { opacity: 1; }
+.chart-col:first-child::after { left: 0; transform: none; }
+.chart-col:last-child::after { left: auto; right: 0; transform: none; }
+.chart-axis { display: flex; gap: 2px; padding-left: 28px; margin-top: 6px; }
+.chart-axis span { flex: 1; text-align: center; font-size: .72rem; color: var(--muted); white-space: nowrap; }
+.chart figcaption { margin-top: 10px; }
+.legend { display: flex; gap: 14px; font-size: .8rem; color: var(--ink-soft); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 14px; height: 10px; border-radius: 3px; background: var(--chart-1); display: inline-block; }
+.swatch.forecast { background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--chart-1) 35%, transparent) 0 2px, transparent 2px 4px); box-shadow: inset 0 0 0 1.5px var(--chart-1); }
+
 /* modal */
 .modal-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(28, 36, 39, .45); }
 .modal { width: min(460px, 100%); background: var(--surface); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--raised); display: grid; gap: 16px; }
