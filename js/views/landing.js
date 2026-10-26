@@ -61,6 +61,7 @@ export const landing = {
             <a class="btn btn-primary" href="#/book">Book a table</a>
             <a class="btn btn-accent" href="#/queue">Join the queue</a>
           </div>
+          <p class="owner-line">Run a cafe? <button type="button" class="link-btn" data-action="signin-open" data-tab="staff">See the owner's side →</button></p>
           ${liveStrip()}
         </div>
         <div class="hero-figure">

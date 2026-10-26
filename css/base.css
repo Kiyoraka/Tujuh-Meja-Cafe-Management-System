@@ -92,6 +92,18 @@ p { margin: 0 0 1em; }
 .site-footer h4 { font-family: var(--font-display); font-size: 1rem; margin: 0 0 .4em; color: var(--ink); }
 .site-footer p { margin: 0; }
 
+.header-cta {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 16px;
+  border: 1.5px solid var(--accent); border-radius: var(--radius-pill); background: transparent;
+  color: var(--on-primary); font-weight: 700; font-size: .9rem; cursor: pointer; white-space: nowrap;
+}
+.header-cta:hover { background: var(--accent); color: var(--ink); text-decoration: none; }
+.header-cta .icon { width: 18px; height: 18px; }
+.site-header .site-nav { margin-left: auto; }
+.link-btn { padding: 0; border: 0; background: none; color: var(--primary); font: inherit; font-weight: 500; cursor: pointer; }
+.link-btn:hover { text-decoration: underline; }
+.owner-line { margin: 16px 0 0; font-size: .92rem; color: var(--ink-soft); }
+
 /* ---------- buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;

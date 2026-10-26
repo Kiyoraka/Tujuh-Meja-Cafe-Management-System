@@ -85,7 +85,7 @@ export function defineAdmin(view) {
       signout() {
         logout();
         toast('Signed out.');
-        navigate('/login');
+        navigate('/');
       },
     },
   };
