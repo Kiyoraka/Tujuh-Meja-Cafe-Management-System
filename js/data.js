@@ -134,5 +134,6 @@ export function createSeed(now = new Date()) {
     nextBookingNo: 415,
     myQueueNo: null,
     lastBookingId: null,
+    pastVisits: [], // a signed-in customer's earlier visits (kept out of today's numbers)
   };
 }

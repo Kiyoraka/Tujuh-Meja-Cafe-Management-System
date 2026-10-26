@@ -1,7 +1,8 @@
 // Booking form (#/book) and its confirmation card (#/book/done).
 
 import { html, formatTime, formatDate, toast } from '../ui.js';
-import { STATE, openSlots, maxParty, book, bookingById } from '../state.js';
+import { STATE, openSlots, maxParty, book, bookingById, guestProfile } from '../state.js';
+import { currentGuest } from '../auth.js';
 import { navigate, queryParam, refresh } from '../router.js';
 import { publicPage } from './layout.js';
 
@@ -17,6 +18,17 @@ function applyQuery() {
   if (day !== null) draft.day = day === '1' ? 1 : 0;
   if (slot) draft.slot = Number(slot);
   if (!openSlots(0).some((s) => !s.full)) draft.day = 1;
+}
+
+// A signed-in customer gets their name and phone filled in once per sign-in.
+let prefilledFor = null;
+function prefillForGuest() {
+  const email = currentGuest();
+  if (!email || prefilledFor === email) return;
+  prefilledFor = email;
+  const profile = guestProfile(email);
+  if (!draft.name) draft.name = profile.name;
+  if (!draft.phone) draft.phone = profile.phone;
 }
 
 function slotsFor(day) {
@@ -52,6 +64,7 @@ export const bookPage = {
   title: 'Book a table',
   render() {
     applyQuery();
+    prefillForGuest();
     const max = maxParty();
     if (draft.party > max) draft.party = max;
     return publicPage(html`
@@ -143,8 +156,9 @@ export const bookPage = {
   submits: {
     book() {
       if (!validate()) { refresh({ force: true }); toast('Almost there — check the highlighted fields.'); return; }
-      book({ name: draft.name, phone: draft.phone, party: draft.party, time: new Date(draft.slot), note: draft.note });
+      book({ name: draft.name, phone: draft.phone, party: draft.party, time: new Date(draft.slot), note: draft.note, guestEmail: currentGuest() });
       Object.assign(draft, { slot: null, name: '', phone: '', note: '', party: 2, errors: {} });
+      prefilledFor = null;
       navigate('/book/done');
     },
   },

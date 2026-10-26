@@ -69,7 +69,7 @@ function occupy(tables, { guest, party, bookingId = null }) {
 
 // ---------- bookings ----------
 
-export function book({ name, phone, party, time, note }) {
+export function book({ name, phone, party, time, note, guestEmail = null }) {
   const no = STATE.nextBookingNo++;
   const booking = {
     id: `b${no}`,
@@ -83,6 +83,7 @@ export function book({ name, phone, party, time, note }) {
     depositStatus: 'held',
     tableIds: [],
     createdAt: new Date(),
+    guestEmail,
   };
   STATE.bookings.push(booking);
   STATE.lastBookingId = booking.id;
@@ -127,6 +128,34 @@ export function cancelBooking(id) {
   Object.assign(booking, { status: 'cancelled', depositStatus: 'refunded' });
   notify();
   return ok();
+}
+
+// ---------- signed-in customers ----------
+
+// Today's bookings made under this email, soonest first.
+export function bookingsFor(email) {
+  return STATE.bookings.filter((b) => b.guestEmail === email).sort((a, b) => a.time - b.time);
+}
+
+export const pastVisitsFor = (email) => STATE.pastVisits.filter((v) => v.guestEmail === email);
+
+// A signed-in customer always has one earlier visit, so "My visits" is never empty.
+// Quiet (no re-render): it runs at sign-in and while the account page renders,
+// which also restores it after a refresh resets the day.
+export function seedGuestVisit(email) {
+  if (!email || pastVisitsFor(email).length) return;
+  const when = new Date();
+  when.setDate(when.getDate() - 6);
+  when.setHours(12, 30, 0, 0);
+  STATE.pastVisits.push({ guestEmail: email, time: when, party: 2, ref: 'TM-0388', status: 'done', depositStatus: 'returned', table: 'T1' });
+}
+
+// Name and phone to prefill: the customer's latest booking, else the email's name.
+export function guestProfile(email) {
+  const last = bookingsFor(email).at(-1);
+  if (last) return { name: last.name, phone: last.phone };
+  const handle = email.split('@')[0].replace(/[._-]+/g, ' ');
+  return { name: handle.replace(/\b\w/g, (c) => c.toUpperCase()), phone: '' };
 }
 
 // ---------- walk-in queue ----------

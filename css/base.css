@@ -270,6 +270,19 @@ p { margin: 0 0 1em; }
 .ready-banner { padding: 22px; border-radius: var(--radius-md); background: #3F6B43; color: var(--surface); }  /* deeper sage: AA for white text */
 .ready-banner h2 { color: var(--surface); margin-bottom: .2em; }
 
+/* ---------- public: my visits ---------- */
+.account { display: grid; gap: 20px; max-width: 760px; }
+.account-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.account-head h1 { margin: 2px 0 4px; }
+.account-queue { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.visits { list-style: none; margin: 0; padding: 0; display: grid; }
+.visit { display: grid; grid-template-columns: 110px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--border-soft); }
+.visit:first-child { border-top: 0; }
+.visit-when { display: grid; }
+.visit-when span { color: var(--ink-soft); font-size: .9rem; }
+.visit-what { display: grid; gap: 4px; }
+.visit.past { opacity: .85; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
