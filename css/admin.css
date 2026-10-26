@@ -76,6 +76,9 @@
 .list-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--border-soft); border-radius: var(--radius-sm); background: var(--bg); }
 .list-row .grow { flex: 1; min-width: 0; }
 .list-row .num { font-family: var(--font-display); font-weight: 700; color: var(--primary); min-width: 42px; }
+.queue-row { flex-wrap: wrap; }
+.row-actions { display: flex; gap: 6px; }
+.notified { color: var(--primary); }
 
 .kpi-unit { font-size: 1rem; font-family: var(--font-body); color: var(--muted); display: inline; }
 .kpi.accent .kpi-unit { color: rgba(251, 245, 234, .8); }

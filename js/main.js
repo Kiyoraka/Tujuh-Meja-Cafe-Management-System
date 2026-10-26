@@ -9,6 +9,7 @@ import { loginPage } from './views/login.js';
 import { dashboardPage } from './views/admin/dashboard.js';
 import { floorPage } from './views/admin/floor.js';
 import { bookingsPage } from './views/admin/bookings.js';
+import { waitlistPage } from './views/admin/waitlist.js';
 
 addRoute('/', landing);
 addRoute('/book', bookPage);
@@ -19,6 +20,7 @@ addRoute('/login', loginPage);
 addRoute('/admin', dashboardPage);
 addRoute('/admin/floor', floorPage);
 addRoute('/admin/bookings', bookingsPage);
+addRoute('/admin/waitlist', waitlistPage);
 
 subscribe(() => refresh());
 startRouter(document.getElementById('app'));
